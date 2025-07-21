@@ -10,3 +10,5 @@ PyJWT
 requests
 gunicorn
 Pillow
+django-storages[google]
+google-cloud-storage

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'drf_spectacular',
     'user',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -147,6 +148,17 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_SCHEMA_CLASS' : 'drf_spectacular.openapi.AutoSchema',
 }
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_BUCKET_NAME = 'image_storage_policy_bandhu'
+GS_PROJECT_ID = 'policy-bandhu'
+
+# Optional: Folder inside bucket
+GS_LOCATION = 'uploads'
+
+# Path to your service account key file
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    os.path.join(BASE_DIR, 'path/to/your-service-account.json')
+)
 
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
