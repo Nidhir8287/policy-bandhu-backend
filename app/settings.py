@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+from google.oauth2 import service_account
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -157,7 +158,7 @@ GS_LOCATION = 'uploads'
 
 # Path to your service account key file
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    os.path.join(BASE_DIR, 'path/to/your-service-account.json')
+    os.path.join(BASE_DIR, 'policy-bandhu-6e82cde304b3.json')
 )
 
 # Email settings

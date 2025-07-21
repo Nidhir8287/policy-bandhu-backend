@@ -4,7 +4,7 @@ LABEL maintainer="pradumnkumar009"
 
 ENV PYTHONUNBUFFERED 1
 
-COPY ./app/requirements.txt /tmp/requirements.txt
+COPY ./requirements.txt /tmp/requirements.txt
 COPY . /app
 
 WORKDIR app/

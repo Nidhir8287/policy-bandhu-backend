@@ -47,3 +47,12 @@ class LoginView(APIView):
             }
         )
         return Response('Successfully Authenticated', status=status.HTTP_200_OK)
+
+class UserProfileView(APIView):
+    serializer_class = UserProfileSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request):
+        user_profile = UserProfile.objects.get(user=request.user)
+        serializer = self.serializer_class(user_profile)
+        return Response(serializer.data, status=status.HTTP_200_OK)

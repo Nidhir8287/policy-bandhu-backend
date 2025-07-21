@@ -25,4 +25,8 @@ urlpatterns = [
          views.LoginView.as_view(),
          name='login'
          ),
+    path('profile/',
+         views.UserProfileView.as_view(),
+         name='login'
+         ),
 ]

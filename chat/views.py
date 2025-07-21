@@ -17,6 +17,7 @@ class MessageListAPIView(APIView):
     GET: list all messages where request.user is author.
     """
     serializer_class = MessageSerializer
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         id_ = self.kwargs.get('chat_id')
@@ -26,6 +27,7 @@ class MessageListAPIView(APIView):
 
 class MessageCreateAPIView(APIView):
     serializer_class = MessageSerializer
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         data = request.data
@@ -46,16 +48,16 @@ class MessageCreateAPIView(APIView):
             )
         if request.user.is_authenticated:
             user = request.user
-            # user_profile = UserProfile.objects.get(user=user)
-            # if user.requests == 10:
-            #     if not user_profile:
-            #         return Response("Max chat attempts for unsubscribed user", status=status.HTTP_400_BAD_REQUEST)
-            #     if user_profile and not user_profile.is_subscribed:
-            #         return Response("Max chat attempts for unsubscribed user", status=status.HTTP_400_BAD_REQUEST)
-            #     if user.requests == 10 and user_profile and user_profile.is_subscribed and user_profile.expires_at > datetime.datetime.today().date():
-            #         return Response("Max chat attempts for unsubscribed user", status=status.HTTP_400_BAD_REQUEST)
-            # user.requests += 1
-            # user.save()
+            user_profile = UserProfile.objects.get(user=user)
+            if user.requests == 10:
+                if not user_profile:
+                    return Response("Max chat attempts for unsubscribed user", status=status.HTTP_400_BAD_REQUEST)
+                if user_profile and not user_profile.is_subscribed:
+                    return Response("Max chat attempts for unsubscribed user", status=status.HTTP_400_BAD_REQUEST)
+                if user.requests == 10 and user_profile and user_profile.is_subscribed and user_profile.expires_at > datetime.datetime.today().date():
+                    return Response("Max chat attempts for unsubscribed user", status=status.HTTP_400_BAD_REQUEST)
+            user.requests += 1
+            user.save()
         else:
             user = None
         # Wrap in transaction so both messages get created or none
