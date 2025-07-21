@@ -5,8 +5,7 @@ from .models import Payment
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ['user', 'id', 'amount']
-    readonly_fields = ('user', 'products', 'razorpay_order_id',
-                       'razorpay_payment_id',
-                       'razorpay_signature', 'amount',
-                       'paid', 'created_at')
+    list_display = ['user', 'id', 'name']
+    readonly_fields = ('user', 'name', 'screenshot',
+                       'email',
+                       'phone', 'message')

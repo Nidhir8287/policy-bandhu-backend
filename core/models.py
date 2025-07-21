@@ -77,6 +77,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    pending_subscription = models.BooleanField(default=False)
     is_subscribed = models.BooleanField(default=False)
     expires_at = models.DateTimeField(auto_now_add=True)
 

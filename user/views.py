@@ -14,9 +14,7 @@ import datetime
 
 import user.utils as utils
 from core.models import User, UserProfile
-from user.serializers import (
-    UserProfileSerializer
-)
+from user.serializers import *
 
 class SubscribeView(APIView):
     permission_classes = [IsAuthenticated]
@@ -35,3 +33,17 @@ class SubscribeView(APIView):
         serializer = self.serializer_class(user_profile)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+class LoginView(APIView):
+    serializer_class = LoginSerializer
+
+    def post(self, request):
+        serializer = request.data
+        user, created = User.objects.get_or_create(
+            sub=serializer['sub'],
+            defaults={
+                'email': serializer['email'],
+                'name': serializer['name'],
+                'picture': serializer['picture'],
+            }
+        )
+        return Response('Successfully Authenticated', status=status.HTTP_200_OK)

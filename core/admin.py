@@ -17,8 +17,7 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (
             None,
-            {'fields': ('name', 'email', 'password', 'phone',
-                        'is_seminar', 'is_subscriber')},
+            {'fields': ('sub', 'name', 'email', 'password', )},
         ),
         (
             _('Permissions'),
@@ -29,18 +28,16 @@ class UserAdmin(BaseUserAdmin):
             {'fields': ('last_login', )},
         )
     )
-    readonly_fields = ['last_login', ]
+    readonly_fields = ['sub', 'last_login', ]
     add_fieldsets = (
         (
             None,
             {'fields': (
+                'sub',
                 'name',
                 'email',
                 'password1',
                 'password2',
-                'phone',
-                'is_seminar',
-                'is_subscriber',
                 'is_active',
                 'is_staff',
                 'is_superuser',

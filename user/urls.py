@@ -21,4 +21,8 @@ urlpatterns = [
          views.SubscribeView.as_view(),
          name='subscribe'
          ),
+    path('login/',
+         views.LoginView.as_view(),
+         name='login'
+         ),
 ]
