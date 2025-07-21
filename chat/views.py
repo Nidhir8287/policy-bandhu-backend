@@ -21,7 +21,7 @@ class MessageListAPIView(APIView):
 
     def get(self, request, *args, **kwargs):
         id_ = self.kwargs.get('chat_id')
-        data = Message.objects.filter(conversation_id=id_).order_by('-updated_at')[:30]
+        data = Message.objects.filter(author=request.user).order_by('-updated_at')[:30]
         return Response(data, status=status.HTTP_201_CREATED)
 
 
