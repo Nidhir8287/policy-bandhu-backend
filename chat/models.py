@@ -4,7 +4,8 @@ from django.utils import timezone
 
 class Message(models.Model):
     content = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='author')
+    to = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='to')
     conversation_id = models.CharField(max_length=512)
     updated_at = models.DateTimeField(auto_now=True)
 
