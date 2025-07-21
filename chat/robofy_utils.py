@@ -61,7 +61,7 @@ def call_robofy(messages, SessionId=""):
 
     # For non-streaming, Robofy returns JSON with e.g., {"text": "..."}
     return {
-        "SessionId": SessionId,
+        "SessionId": resp.json()['Data']['SessionId'],
         "response": resp.json()['Data']['BotAnswer']
     }
 

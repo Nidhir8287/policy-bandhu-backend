@@ -172,8 +172,8 @@ DEFAULT_FROM_EMAIL = 'your_email@example.com'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = False
 # DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-DIALOGFLOW_PROJECT_ID = "nidhi-doro"
-DIALOGFLOW_LANGUAGE_CODE = "en-US"  # or whichever locale you use
+# DIALOGFLOW_PROJECT_ID = "nidhi-doro"
+# DIALOGFLOW_LANGUAGE_CODE = "en-US"  # or whichever locale you use
 
 RAZORPAY_KEY_ID = 'rzp_test_Gdv3pkoaEb6qHc'
 RAZORPAY_KEY_SECRET = 'oqjKAIXzFRh4F3BxPwawAOZr'
