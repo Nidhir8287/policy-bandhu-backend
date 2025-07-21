@@ -157,9 +157,9 @@ GS_PROJECT_ID = 'policy-bandhu'
 GS_LOCATION = 'uploads'
 
 # Path to your service account key file
-GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    os.path.join(BASE_DIR, 'policy-bandhu-6e82cde304b3.json')
-)
+# GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+#     os.path.join(BASE_DIR, 'policy-bandhu-6e82cde304b3.json')
+# )
 
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
