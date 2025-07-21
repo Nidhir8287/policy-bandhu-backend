@@ -8,7 +8,7 @@ from .serializers import *
 from .robofy_utils import *
 from django.conf import settings
 from django.db import transaction
-from core.models import User, TempUser
+from core.models import User, TempUser, UserProfile
 import random
 import datetime
 
@@ -33,13 +33,6 @@ class MessageCreateAPIView(APIView):
         data = request.data
         content = data.get('content')
         chat_id = data.get('chat_id')
-        if data.get('cookie'):
-            cookie = data.get('cookie')
-            user = TempUser.objects.get_or_create(cookie=cookie)
-            if user.requests == 10:
-                return Response("Max chat attempts for unsubscribed user", status=status.HTTP_400_BAD_REQUEST)
-            user.requests += 1
-            user.save()
 
         if not content:
             return Response(
@@ -49,15 +42,8 @@ class MessageCreateAPIView(APIView):
         if request.user.is_authenticated:
             user = request.user
             user_profile = UserProfile.objects.get(user=user)
-            if user.requests == 10:
-                if not user_profile:
-                    return Response("Max chat attempts for unsubscribed user", status=status.HTTP_400_BAD_REQUEST)
-                if user_profile and not user_profile.is_subscribed:
-                    return Response("Max chat attempts for unsubscribed user", status=status.HTTP_400_BAD_REQUEST)
-                if user.requests == 10 and user_profile and user_profile.is_subscribed and user_profile.expires_at > datetime.datetime.today().date():
-                    return Response("Max chat attempts for unsubscribed user", status=status.HTTP_400_BAD_REQUEST)
-            user.requests += 1
-            user.save()
+            if not user_profile or not user_profile.is_subscribed:
+                return Response("Max chat attempts for unsubscribed user", status=status.HTTP_400_BAD_REQUEST)
         else:
             user = None
         # Wrap in transaction so both messages get created or none
