@@ -27,6 +27,9 @@ SECRET_KEY = 'django-insecure-u^p35)@_0uqbop&-!eaj+4v7ob%6b#tvhm2avxs94=g&7g_-le
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = [
+    "https://policy-bandhu-backend-902003158410.asia-south1.run.app"
+]
 
 
 # Application definition
@@ -121,7 +124,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
