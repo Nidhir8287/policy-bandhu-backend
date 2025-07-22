@@ -46,6 +46,9 @@ class LoginView(APIView):
                 'picture': serializer['picture'],
             }
         )
+        user_profile, created = UserProfile.objects.get_or_create(
+            user=user
+        )
         return Response('Successfully Authenticated', status=status.HTTP_200_OK)
 
 class UserProfileView(APIView):
