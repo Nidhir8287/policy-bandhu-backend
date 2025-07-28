@@ -28,7 +28,7 @@ class CreateOrderView(APIView):
             phone=payload['phone'],
             screenshot=payload['screenshot'],
             message=payload['message'],
-            user=user)
+            user=request.user)
         user_profile, created = UserProfile.object.get_or_create(user=user)
         user_profile.pending_subscription=True
         user_profile.save()
