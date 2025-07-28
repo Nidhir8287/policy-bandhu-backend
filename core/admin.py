@@ -45,6 +45,28 @@ class UserAdmin(BaseUserAdmin):
         ),
     )
 
+class UserProfileAdmin(admin.ModelAdmin):
+    """Define the admin pages for users"""
+    ordering = ["user__email", ]
+    list_display = ["user",]
+    fieldsets = (
+        (
+            None,
+            {'fields': ('user', 'pending_subscription', 'is_subscribed', 'message_count')},
+        ),
+    )
+    add_fieldsets = (
+        (
+            None,
+            {'fields': (
+                'user',
+                'pending_subscription',
+                'is_subscribed',
+                'message_count',
+            )}
+        ),
+    )
+
 
 admin.site.register(models.User, UserAdmin)
-admin.site.register(models.UserProfile)
+admin.site.register(models.UserProfile, UserProfileAdmin)
