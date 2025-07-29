@@ -20,8 +20,7 @@ class CreateOrderView(APIView):
 
     def post(self, request, *args, **kwargs):
         payload = request.data
-        serializer = self.serializer_class(data=payload)
-        serializer.is_valid(raise_exception=True)
+        user = request.user
         payment, created = Payment.objects.get_or_create(
             name=payload['name'],
             email=payload['email'],
@@ -29,7 +28,7 @@ class CreateOrderView(APIView):
             screenshot=payload['screenshot'],
             message=payload['message'],
             user=request.user)
-        user_profile, created = UserProfile.object.get_or_create(user=user)
+        user_profile, created = UserProfile.objects.get_or_create(user=user)
         user_profile.pending_subscription=True
         user_profile.save()
         return Response('Order Created', status=status.HTTP_201_CREATED)
